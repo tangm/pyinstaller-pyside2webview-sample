@@ -48,9 +48,8 @@ if pyside2_library_info.version:
         resources = 'resources'
         datas += [
             # Gather translations needed by Chromium.
-            (os.path.join(pyside2_library_info.location['TranslationsPath'],
-                          locales),
-             os.path.join('PySide2', 'translations', locales)),
+            (os.path.join(pyside2_library_info.location['TranslationsPath'], locales),
+             os.path.join(*(rel_data_path + ['translations', locales]))),
             # Per the `docs <https://doc.qt.io/qt-5.10/qtwebengine-deploying.html#deploying-resources>`_,
             # ``DataPath`` is the base directory for ``resources``.
             #
