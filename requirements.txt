@@ -1,0 +1,2 @@
+https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz#egg=PyInstaller
+PySide2==5.13.0
