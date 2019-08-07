@@ -1,46 +1,46 @@
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta content="IE=edge" http-equiv="X-UA-Compatible">
-	<script src="qrc:///qtwebchannel/qwebchannel.js"></script>
-	<title>Hello</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+  <title>Hello</title>
 </head>
 <body style="text-align: center; font-size: 1.5rem">
-	<h2>
-		My name is: <input id="nameInput">
-	</h2>
+  <h2>
+    My name is: <input id="nameInput">
+  </h2>
 
-	<div id="result">
-	</div>
-	<button id="sayHello" style="font-size: 1.5rem">
-		Say Hello
-	</button>
-	<script>
-		document.addEventListener('contextmenu', event => event.preventDefault());
-		document.addEventListener('DOMContentLoaded', function () {
-			
-			const nameInput = document.getElementById('nameInput');
-			const result = document.getElementById('result'); 
-			const sayHello = document.getElementById('sayHello');
-			
-			// Obtain the exposed python object interface
-			const getBackend = new Promise((resolve, reject) => {
-				new QWebChannel(qt.webChannelTransport, 
-					(channel) => resolve(channel.objects.backend));
-			})
+  <div id="result">
+  </div>
+  <button id="sayHello" style="font-size: 1.5rem">
+    Say Hello
+  </button>
+  <script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('DOMContentLoaded', function () {
+      
+      const nameInput = document.getElementById('nameInput');
+      const result = document.getElementById('result'); 
+      const sayHello = document.getElementById('sayHello');
+      
+      // Obtain the exposed python object interface
+      const getBackend = new Promise((resolve, reject) => {
+        new QWebChannel(qt.webChannelTransport, 
+          (channel) => resolve(channel.objects.backend));
+      })
 
-			// Show a preview when an image file is selected
-			sayHello.addEventListener('click', function(){
-				result.textContent = '';
-				getBackend.then((backend) => {
-					backend.sayHello(nameInput.value, (prediction) => {
-						result.textContent = prediction;
-					});							
-				})
-			});
-		});
-	</script>
+      // Call to the other side
+      sayHello.addEventListener('click', function(){
+        result.textContent = '';
+        getBackend.then((backend) => {
+          backend.sayHello(nameInput.value, (prediction) => {
+            result.textContent = prediction;
+          });              
+        })
+      });
+    });
+  </script>
 </body>
 </html>
