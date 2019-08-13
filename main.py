@@ -7,7 +7,7 @@ from PySide2.QtWebChannel import QWebChannel
 from PySide2.QtCore import QUrl, Slot, QObject, QUrl
 
 # Some hackery required for pyInstaller
-if sys.platform == 'darwin':
+if getattr(sys, 'frozen', False) and sys.platform == 'darwin':
     os.environ['QTWEBENGINEPROCESS_PATH'] = os.path.normpath(os.path.join(
         sys._MEIPASS, 'PySide2', 'Qt', 'lib',
         'QtWebEngineCore.framework', 'Helpers', 'QtWebEngineProcess.app',
